@@ -1,0 +1,15 @@
+@import 'variables';
+
+.header-container {
+	width: 100%;
+	padding: 20px 25px;
+	background-color: $dark-main;
+
+	h1 {
+		font-family: $heading-font;
+	}
+
+	p {
+		font-family: $body-font;
+	}
+}
