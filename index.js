@@ -9,7 +9,7 @@ var webpackMiddleware = require('webpack-dev-middleware');
 var mongoose = require('mongoose');
 
 // connecting to our database
-mongoose.connect('mongodb://localhost/island_collection');
+mongoose.connect(process.env.MONGODB_SERVER);
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -29,4 +29,4 @@ app.use('/api/islands', require('./api/islands'));
 app.get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'))
 
 // here, we set a port for our app to run on
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
