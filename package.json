@@ -27,11 +27,12 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
-    "webpack-dev-middleware": "^1.8.4"
-  },
-  "devDependencies": {
+    "webpack-dev-middleware": "^1.8.4",
     "dotenv": "^4.0.0",
     "file-loader": "^0.11.1",
     "url-loader": "^0.5.8"
+  },
+  "devDependencies": {
+    
   }
 }
