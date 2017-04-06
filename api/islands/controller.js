@@ -62,7 +62,9 @@ exports.update = function(req, res) {
     island.description = req.body.description;
     island.latitude = req.body.latitude;
     island.longitude = req.body.longitude;
-
+	
+	// then, it saves the island object
+	// and sends the revised island back to the requester (our app)
     island.save()
     .then(function(island) {
       res.send(island);

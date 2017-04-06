@@ -12,7 +12,7 @@ import IslandMap from './components/island_map.js';
 import ErrorPage from './components/error_page.js';
 import IslandList from './components/island_list.js';
 
-// TODO: Render your routes inside the router
+// all my routes to various components
 ReactDOM.render((
 	<Router history={browserHistory}>
 		<Route path="/" component={App}>

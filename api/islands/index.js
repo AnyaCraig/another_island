@@ -25,6 +25,9 @@ router.delete('/:id', controller.destroy);
 // call the create function from the controller
 router.post('/', controller.create);
 
+// if the requested url is /api/islands/{a specific id}/
+// with a method of PUT,
+// call the update function from the controller
 router.put('/:id', controller.update);
 
 // we just added stuff to the router object,

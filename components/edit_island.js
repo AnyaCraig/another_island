@@ -24,8 +24,11 @@ class EditIsland extends React.Component {
 
 	componentDidMount() {
 
+		// we get the specific island by looking for an island in our array
+		// that matches the requested id
 		var island = this.props.islands.find(island => island._id == this.props.params.id);
 
+		// we set the initial island properties in an object...
 		var islandObject = {
 			name: island.name, 
 			briefLocation: island.briefLocation, 
@@ -35,20 +38,24 @@ class EditIsland extends React.Component {
 			longitude: island.longitude
 		};
 
+		// which we then push up to state
 		this.setState({
 			updatedIsland: islandObject,
 			islandId: this.props.params.id,
 		})
-		
-
 	}
 
+	// we make a copy of our island object from state,
+	// update the specific property
+	// and replace the island object in state with the updated one
 	updateIsland(evt) {
 	  var updatedIsland = Object.assign(this.state.updatedIsland);
 	  updatedIsland[evt.target.id] = evt.target.value;
 	  this.setState({updatedIsland: updatedIsland});
 	}
 
+	// we send the updated island up to the parent
+	// and empty out our local state
 	saveChanges() {
 		this.props.onEditIsland(this.state.islandId, this.state.updatedIsland)
 
@@ -65,8 +72,6 @@ class EditIsland extends React.Component {
 			updatedIsland: emptyIsland,
 			islandId: "",
 		})
-
-
 	}
   
   	render() {

@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 // we need React, of course
 import React from 'react';
 
+// we're going to use our searchbar component
 import SearchBar from './search_bar.js';
 
 class Header extends React.Component {

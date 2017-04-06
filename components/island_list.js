@@ -30,10 +30,8 @@ class IslandList extends React.Component {
                                 key={island._id}
                                 onDeleteIsland = {(islandId) => this.props.onDeleteIsland(islandId)}
 							/>
-				
 						);
     				})
-
     			}
     		</div>
     	);
