@@ -12,6 +12,8 @@ class AddIsland extends React.Component {
         briefLocation: "",
         image: "",
         description: "",
+        latitude: "",
+        longitude: "",
       }
 	  }
 
@@ -39,6 +41,22 @@ class AddIsland extends React.Component {
     var islandObject = this.state.newIsland;
 
     this.props.onAddIsland(islandObject);
+
+    // Empty out all the inputs so that we can add another island
+
+    // make a copy of the newIsland object in state
+    var newIslandCopy = Object.assign(this.state.newIsland);
+
+    // change the value of all properties to an empty string
+    newIslandCopy.name = "";
+    newIslandCopy.briefLocation = "";
+    newIslandCopy.image = "";
+    newIslandCopy.description = "";
+    newIslandCopy.latitude = "";
+    newIslandCopy.longitude = "";
+
+    // set our copy as the new value of newIsland in state
+    this.setState({ newIsland: newIslandCopy });
   }
   
 	render() {
@@ -48,10 +66,10 @@ class AddIsland extends React.Component {
   			<h4>Add an island here</h4>
   			<input  placeholder="Add your island's name here"
                 id="name"
-                value={this.state.newIsland.islandName}
+                value={this.state.newIsland.name}
                 onChange={(evt) => this.updateInfo(evt)}
         />
-        <input  placeholder="Add a brief location for your island here"
+        <input  placeholder="Where is your island?"
                 id="briefLocation"
                 value={this.state.newIsland.briefLocation}
                 onChange={(evt) => this.updateInfo(evt)}
@@ -61,9 +79,19 @@ class AddIsland extends React.Component {
                 value={this.state.newIsland.image}
                 onChange={(evt) => this.updateInfo(evt)}
         />
-        <input  placeholder="Add a description of your island here"
-                id="description"
-                value={this.state.newIsland.description}
+        <textarea   placeholder="Add a description of your island here"
+                    id="description"
+                    value={this.state.newIsland.description}
+                    onChange={(evt) => this.updateInfo(evt)}
+        />
+        <input  placeholder="Add the latitude of your island"
+                id="latitude"
+                value={this.state.newIsland.latitude}
+                onChange={(evt) => this.updateInfo(evt)}
+        />
+        <input  placeholder="Add the longitude of your island"
+                id="longitude"
+                value={this.state.newIsland.longitude}
                 onChange={(evt) => this.updateInfo(evt)}
         />
 

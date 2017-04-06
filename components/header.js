@@ -1,7 +1,11 @@
 // this is our HEADER component
 
+import { Link } from 'react-router';
+
 // we need React, of course
 import React from 'react';
+
+import SearchBar from './search_bar.js';
 
 class Header extends React.Component {
 
@@ -13,8 +17,10 @@ class Header extends React.Component {
     		<div className="header-container">
     			<h1>Another Island</h1>
     			<p>You have collected { numberOfIslands } islands!</p>
-    			<p>Islands</p>
-    			<p>Map</p>
+    			<Link to="/island-list">Islands</Link>
+    			<Link to="/island-map">Map</Link>
+          <Link to="/add-island">Add an Island</Link>
+          <SearchBar searchTerm={this.props.searchTerm} onSearchChanged={(evt) => this.props.onSearchChanged(evt)}/>
     		</div>
     	);
   	}

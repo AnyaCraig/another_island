@@ -18,12 +18,14 @@ router.get('/', controller.index);
 // if the requested url is /api/islands/{a specific id}/
 // with a method of DELETE,
 // call the destroy function from the controller
-// router.delete('/:id', controller.destroy);
+router.delete('/:id', controller.destroy);
 
 // if the requested url is /api/islands/
 // with a method of POST,
 // call the create function from the controller
 router.post('/', controller.create);
+
+router.put('/:id', controller.update);
 
 // we just added stuff to the router object,
 // so now we can export and use it

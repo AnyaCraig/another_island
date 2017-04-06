@@ -1,9 +1,9 @@
 @import 'variables';
 
 .header-container {
-	width: 100%;
 	padding: 20px 25px;
 	background-color: $dark-main;
+	background-size: cover;
 
 	h1 {
 		font-family: $heading-font;

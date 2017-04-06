@@ -24,6 +24,11 @@ class IslandList extends React.Component {
 								islandLocation = {island.briefLocation}
 								islandImage = {island.image}
 								islandDescription = {island.description}
+                                islandLatitude = {island.latitude}
+                                islandLongitude = {island.longitude}
+                                islandId = {island._id}
+                                key={island._id}
+                                onDeleteIsland = {(islandId) => this.props.onDeleteIsland(islandId)}
 							/>
 				
 						);

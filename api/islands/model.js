@@ -8,6 +8,8 @@ var IslandSchema = new mongoose.Schema({
 	briefLocation: String,
 	image: String,
 	description: String,
+	latitude: Number,
+	longitude: Number,
 });
 
 module.exports = mongoose.model('Island', IslandSchema);

@@ -2,6 +2,7 @@
 
 // we need React, of course
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 // we need jQuery for the Ajax calls
 import $ from 'jquery';
@@ -20,21 +21,31 @@ class App extends React.Component {
 	  	super(props);
 	  	this.state = {
 	  		islands: [],
+	  		searchTerm: '',
 	  	}
 	  	
-	  	this.addNewIsland = this.addNewIsland.bind(this);
 	  	this.refresh = this.refresh.bind(this);
+	  	this.searchChanged = this.searchChanged.bind(this);
+	  	this.addNewIsland = this.addNewIsland.bind(this);
+	  	this.editIsland = this.editIsland.bind(this);
+	  	this.deleteIsland = this.deleteIsland.bind(this);
+	  	this.redirectToHome = this.redirectToHome.bind(this);
 	}
 
 	// this function refreshes the list of islands we see
 	refresh() {
-		
+
 		// we get the islands
 		// set the new islands array in state
 		// and send an error message in case it fails
-		$.get('/api/islands')
-		.then((islands) => { this.setState({ islands: islands}) })
-		.catch((err) => {this.setState({ error: err.message }) });
+
+		$.get('/api/islands?q=' + this.state.searchTerm)
+		.then((islands) => { 
+			this.setState({ islands: islands}) ;
+		})
+		.catch((err) => {
+			this.setState({ error: err.message }); 
+		});
 
 	}
 
@@ -43,6 +54,10 @@ class App extends React.Component {
 
 		this.refresh();
 
+	}
+
+	searchChanged(evt) {
+		this.setState({searchTerm: evt.target.value}, this.refresh);
 	}
 
 	addNewIsland(islandObject) {
@@ -58,16 +73,69 @@ class App extends React.Component {
 	      contentType: 'application/json'
 	   })
 	   .then((island) => {
+	      this.redirectToHome();
 	      this.refresh();
 	   })
 	}
-  
+
+	editIsland(islandId, islandObject) {
+
+		// here is our ajax call for editing an existing island
+		// we include the id that we want to edit and the object
+		// containing the updated island information
+		$.ajax({
+		  method: 'PUT',
+		  url: '/api/islands/' + islandId,
+		  contentType: "application/json; charset=utf-8",
+		  data: JSON.stringify(islandObject),
+		  success: () => {
+		    this.refresh();
+		    this.redirectToHome();
+		  },
+		  error: (err) => {
+		    this.setState({ errors: err.responseJSON.errors });
+		  }
+		});
+	}
+
+	deleteIsland(islandId) {
+
+		// here, we delete an island based on its ID
+		$.ajax({
+			method: 'DELETE',
+			url: '/api/islands/' + islandId,
+		})
+		.then(() => {
+			this.refresh();
+		})
+
+	}
+
+	// redirect to the main page
+	redirectToHome() {
+		browserHistory.push("/");
+	}
+
   	render() {
+
+
     	return (
     		<div className="app-container">
-    			<Header islands={this.state.islands} />
-    			<IslandList islands={this.state.islands} />
-    			<AddIsland onAddIsland={(islandObject) => this.addNewIsland(islandObject)} />
+    			<Header islands={this.state.islands}
+    					searchTerm={this.state.searchTerm}
+    					onSearchChanged={(evt) => this.searchChanged(evt)} 
+    			/>
+
+    			{
+    				React.cloneElement(this.props.children, {
+					islands: this.state.islands,
+    			  	onDeleteIsland: (islandId) => this.deleteIsland(islandId),
+    			  	onAddIsland: (islandObject) => this.addNewIsland(islandObject),
+    			  	onEditIsland: (islandId, islandObject) => this.editIsland(islandId, islandObject),
+
+    				})
+    			}
+    			
     		</div>
     	);
   	}

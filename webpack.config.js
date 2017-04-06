@@ -18,7 +18,11 @@ module.exports = {
          test: /.scss$/,
          loaders: ["style", "css", "sass"],
          exclude: /node_modules/
-       }
+       },
+       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
       ]
+    },
+    devServer: {
+        historyApiFallback: true
     }
 };
