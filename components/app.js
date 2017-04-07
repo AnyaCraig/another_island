@@ -35,7 +35,7 @@ class App extends React.Component {
 	// this function refreshes the list of islands we see
 	refresh() {
 
-		// we get the islands
+		// we get the islands that match the search term in state
 		// set the new islands array in state
 		// and send an error message in case it fails
 
@@ -51,9 +51,7 @@ class App extends React.Component {
 
 	// when the component mounts, we refresh the posts
 	componentDidMount() {
-
 		this.refresh();
-
 	}
 
 	searchChanged(evt) {
