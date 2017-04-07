@@ -116,7 +116,6 @@ class App extends React.Component {
 
   	render() {
 
-
     	return (
     		<div className="app-container">
     			<Header islands={this.state.islands}

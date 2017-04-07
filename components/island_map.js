@@ -1,6 +1,5 @@
 import React from "react";
 
-
 class IslandMap extends React.Component {
 
 	// determine whether this is being used to show all the islands

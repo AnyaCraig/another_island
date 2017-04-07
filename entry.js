@@ -26,5 +26,3 @@ ReactDOM.render((
 		</Route>
 	</Router>
 ), document.getElementById("placeholder"));
-
-
